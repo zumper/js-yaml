@@ -1271,7 +1271,6 @@ function storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, valu
   // We need to convert keyNode to a string, but doing so can hang the process
   // (deeply nested arrays that explode exponentially using aliases) or execute
   // code via toString.
-
   if (Array.isArray(keyNode)) {
     for (index = 0, quantity = keyNode.length; index < quantity; index += 1) {
       if (Array.isArray(keyNode[index])) {
