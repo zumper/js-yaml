@@ -1263,14 +1263,14 @@ function mergeMappings(state, destination, source, overridableKeys) {
 function storeMappingPair(state, _result, overridableKeys, keyTag, keyNode, valueNode, startLine, startPos) {
   var index, quantity;
 
+  if (typeof keyNode === 'object') {
+    throw new Error('Keys are not allowed to be objects, key: ' + JSON.stringify(keyNode));
+  }
+
   // The output is a plain object here, so keys can only be strings.
   // We need to convert keyNode to a string, but doing so can hang the process
   // (deeply nested arrays that explode exponentially using aliases) or execute
   // code via toString.
-
-  if (typeof keyNode === 'object') {
-    throw new Error('Key is an object');
-  }
 
   if (Array.isArray(keyNode)) {
     for (index = 0, quantity = keyNode.length; index < quantity; index += 1) {
